@@ -2,6 +2,9 @@ library(shiny)
 library(tidyverse)
 library(rvest)
 
+#Go to  https://danielbrey.shinyapps.io/BoardGames/ to use the program
+
+
 #devtools::install_github("9thcirclegames/bgg-analysis")
 
 boardgames.data <- read_csv("BoardGames.csv")

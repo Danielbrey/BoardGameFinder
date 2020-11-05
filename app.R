@@ -2,15 +2,7 @@ library(shiny)
 library(tidyverse)
 library(rvest)
 
-#Go to  https://danielbrey.shinyapps.io/BoardGames/ to use the program
-
-
-#devtools::install_github("9thcirclegames/bgg-analysis")
-
 boardgames.data <- read_csv("BoardGames.csv")
-
-bg.data.update <- boardgames.data %>% 
-    filter(attributes.boardgamedesigner != "(Uncredited)")
 
 ui <- fluidPage(
     numericInput(inputId = "choose.num.players",
@@ -49,16 +41,14 @@ ui <- fluidPage(
 server <- function(input, output) {
 
     output$table1 <- renderTable({
-        bg.custom <- boardgames.data %>% 
-            filter(game.type == "boardgame",
-                   attributes.boardgamedesigner != "(Uncredited)", #or get rid of 0's altogether?
-                   details.maxplayers >= input$choose.num.players,
+        boardgames.data %>% 
+            filter(details.maxplayers >= input$choose.num.players,
                    details.minplayers <= input$choose.num.players,
-                   details.maxplaytime <= input$choose.max.playtime,
-                   details.minplaytime >= input$choose.min.playtime,
+                   details.playingtime <= input$choose.max.playtime,
+                   details.playingtime >= input$choose.min.playtime,
                    str_detect(boardgames.data$attributes.boardgamecategory,
                               input$choose.category) == TRUE) %>% 
-            arrange(-stats.owned) %>% 
+            arrange(-stats.average) %>% 
             select(details.name, details.description,
                    stats.average, stats.averageweight) %>% 
             head(5)
@@ -66,9 +56,7 @@ server <- function(input, output) {
     
     output$plot1 <- renderPlot({
         boardgames.data %>% 
-            filter(game.type == "boardgame",
-                   attributes.boardgamedesigner != "(Uncredited)",
-                   str_detect(boardgames.data$attributes.boardgamecategory,
+            filter(str_detect(boardgames.data$attributes.boardgamecategory,
                               input$choose.category) == TRUE) %>% 
             ggplot(aes(x = stats.average))+
             geom_density()+
@@ -77,9 +65,7 @@ server <- function(input, output) {
     
     output$plot2 <- renderPlot({
         boardgames.data %>% 
-            filter(game.type == "boardgame",
-                   attributes.boardgamedesigner != "(Uncredited)",
-                   str_detect(boardgames.data$attributes.boardgamecategory,
+            filter(str_detect(boardgames.data$attributes.boardgamecategory,
                               input$choose.category) == TRUE) %>% 
             ggplot(aes(x = stats.averageweight))+
             geom_density()+

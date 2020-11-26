@@ -5,6 +5,7 @@ Future Updates:
 - Give recommended games based on games you like 
 - Find how multiple variables (quantitative and qualitative) affect game weight and game rating 
 \
+\
 Link to program: https://danielbrey.shinyapps.io/BoardGames/ \
 Link to data: https://www.kaggle.com/gabrio/board-games-dataset \
 Note: I had to remove a lot of the data (selecting only the necessary columns and taking away those that were not owned by more than a certain amount of people) to make it fit into a usable dataset.

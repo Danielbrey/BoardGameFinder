@@ -1,4 +1,4 @@
-# BoardGame
+# Board Game Finder
 By giving preferences about the game, the 5 top board games will be listed, based on the amount of people who own it. This data was taken from Kaggle, from BoardGameGeek. There are two graphs that display the difference in the distribution of rating (game score out of 10) and weight (game complexity out of 5) for games within and not in that category.\
 \
 Link to program: https://danielbrey.shinyapps.io/BoardTogether/ \

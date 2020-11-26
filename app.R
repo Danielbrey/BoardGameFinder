@@ -22,7 +22,6 @@ boardgames.data$details.description <- str_replace_all(boardgames.data$details.d
                                                        "-")
 
 ui <- dashboardPage(
-    #theme = shinytheme("darkly"),
     dashboardHeader(title = "Board Game Finder"),
     
     #These inputs go into the sidebar
@@ -158,7 +157,6 @@ server <- function(input, output) {
     options = list(
         dom = 't',
         ordering = FALSE,
-        #rowCallback = JS("function(r,d) {$(r).attr('height', '10px')}"),
         searching = FALSE,
         paging = FALSE),
     escape = FALSE
